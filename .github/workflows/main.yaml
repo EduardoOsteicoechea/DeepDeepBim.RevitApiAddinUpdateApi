@@ -1,0 +1,56 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout workflow file (no repo content needed on runner for this strategy)
+        uses: actions/checkout@v3
+
+      - name: Set up AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }} 
+
+      - name: Deploy Static Files via EC2 SSH Clone and Move
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }} 
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            REMOTE_REPO_URL="https://github.com/EduardoOsteicoechea/eduardoos_api_dotnet"
+            TEMP_CLONE_DIR="/tmp/static_repo_$(date +%s)"
+            DEST_DIR="/var/www/html/deepdeepbimapi"
+
+            sudo mkdir -p "$DEST_DIR"
+            sudo chown -R ${{ secrets.USERNAME }}:${{ secrets.USERNAME }} "$DEST_DIR"
+            sudo chmod -R 755 "$DEST_DIR"
+
+            echo "Cloning repository to temporary directory: $TEMP_CLONE_DIR"
+            git clone "$REMOTE_REPO_URL" "$TEMP_CLONE_DIR"
+
+            if [ ! -d "$TEMP_CLONE_DIR" ]; then
+              echo "Error: Failed to clone repository $REMOTE_REPO_URL" 
+              exit 1
+            fi
+
+            sudo cp -r "$TEMP_CLONE_DIR"/* "$DEST_DIR"/
+
+            sudo rm -rf "$TEMP_CLONE_DIR"
+                  
+            sudo rm -rf /var/cache/nginx/*                  
+            echo "Restarting Nginx..."
+            sudo systemctl restart nginx
+            echo "Reloading Nginx configuration..."
+            sudo systemctl reload nginx 
+
+            sudo systemctl daemon-reload
+            cd /etc/systemd/system/ 
+            sudo systemctl restart eduardoos-deepdeepbim-api.service
