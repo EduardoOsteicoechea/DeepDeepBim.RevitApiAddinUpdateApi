@@ -1,0 +1,6 @@
+@DeepDeepBim.RevitApiAddinUpdateApi_HostAddress = http://localhost:5215
+
+GET {{DeepDeepBim.RevitApiAddinUpdateApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
