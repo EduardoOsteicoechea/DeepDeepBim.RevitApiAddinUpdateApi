@@ -23,7 +23,7 @@ jobs:
         with:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.USERNAME }} 
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }} 
           script: |
             REMOTE_REPO_URL="https://github.com/EduardoOsteicoechea/DeepDeepBim.RevitApiAddinUpdateApi"
             TEMP_CLONE_DIR="/tmp/static_repo_$(date +%s)"
