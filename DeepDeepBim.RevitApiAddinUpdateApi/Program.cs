@@ -16,7 +16,7 @@ builder.Services.AddSingleton<IAmazonS3>(sp =>
 
 	var secretKey = Environment.GetEnvironmentVariable("DEEPDEEPBIM_REVIT_ADDIN_UPDATE_S3_SECRET_KEY");
 
-	if (string.IsNullOrEmpty(secretKey))
+	if (string.IsNullOrEmpty(secretKey)) 
 	{
 		throw new Exception($"NOT FOUND: {nameof(secretKey)}.");
 	}
