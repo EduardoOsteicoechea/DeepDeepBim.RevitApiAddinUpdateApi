@@ -110,7 +110,7 @@ bool ValidateUserKey(string userKey)
 }
 
 async Task StreamS3FileToZipAsync(IAmazonS3 client, string bucketName, string key, Stream destination)
-{
+{ 
 	try
 	{
 		var getRequest = new GetObjectRequest
