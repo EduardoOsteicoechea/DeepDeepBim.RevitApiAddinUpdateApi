@@ -26,7 +26,7 @@ builder.Services.AddSingleton<IAmazonS3>(sp =>
 
 var app = builder.Build();
 
-app.MapPost("deepdeppbim/api/update-revit-addin", async (HttpContext context, IAmazonS3 s3Client) =>
+app.MapPost("deepdeepbim/api/update-revit-addin", async (HttpContext context, IAmazonS3 s3Client) =>
 {
 	string? receivedUserKey = context.Request.Headers["X-DeepDeepBim-Key"];
 
