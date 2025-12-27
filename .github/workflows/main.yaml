@@ -27,7 +27,7 @@ jobs:
           script: |
             REMOTE_REPO_URL="https://github.com/EduardoOsteicoechea/DeepDeepBim.RevitApiAddinUpdateApi"
             TEMP_CLONE_DIR="/tmp/static_repo_$(date +%s)"
-            DEST_DIR="/var/www/html/deepdeepbimapi"
+            DEST_DIR="/var/www/html/deepdeepbimapi" 
 
             sudo mkdir -p "$DEST_DIR"
             sudo chown -R ${{ secrets.USERNAME }}:${{ secrets.USERNAME }} "$DEST_DIR"
