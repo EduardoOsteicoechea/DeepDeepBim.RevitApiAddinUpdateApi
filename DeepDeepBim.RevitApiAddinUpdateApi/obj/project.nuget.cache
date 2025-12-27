@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "WfGzfE+BRvg=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\eduar\\Documents\\work\\internal\\deepdeepbim\\revitapi\\DeepDeepBim.RevitApiAddinUpdateApi\\DeepDeepBim.RevitApiAddinUpdateApi\\DeepDeepBim.RevitApiAddinUpdateApi.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\eduar\\.nuget\\packages\\awssdk.core\\4.0.3.6\\awssdk.core.4.0.3.6.nupkg.sha512",
+    "C:\\Users\\eduar\\.nuget\\packages\\awssdk.s3\\4.0.16\\awssdk.s3.4.0.16.nupkg.sha512"
+  ],
+  "logs": []
+}
