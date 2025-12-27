@@ -38,7 +38,7 @@ jobs:
 
             if [ ! -d "$TEMP_CLONE_DIR" ]; then
               echo "Error: Failed to clone repository $REMOTE_REPO_URL" 
-              exit 1
+              exit 1 
             fi
 
             sudo cp -r "$TEMP_CLONE_DIR"/* "$DEST_DIR"/
