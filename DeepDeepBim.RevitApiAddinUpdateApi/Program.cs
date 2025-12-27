@@ -74,31 +74,29 @@ app.MapPost("deepdeepbim/api/update-revit-addin", async (HttpContext context, IA
     context.Response.Headers.Append("X-Total-Uncompressed-Size", totalUncompressedBytes.ToString());
 
     return Results.Stream(async (outputStream) =>
-{
-    // FIX: Allow ZipArchive to write its footer synchronously
-    var syncIOFeature = context.Features.Get<IHttpBodyControlFeature>();
-    if (syncIOFeature != null)
     {
-        syncIOFeature.AllowSynchronousIO = true;
-    }
+        var syncIOFeature = context.Features.Get<IHttpBodyControlFeature>();
+        if (syncIOFeature != null)
+        {
+            syncIOFeature.AllowSynchronousIO = true;
+        }
 
-    using var archive = new System.IO.Compression.ZipArchive(outputStream, ZipArchiveMode.Create, leaveOpen: false);
+        using var archive = new System.IO.Compression.ZipArchive(outputStream, ZipArchiveMode.Create, leaveOpen: false);
 
-    foreach (var item in filesToDownload)
-    {
-        // ... (rest of your loop remains the same) ...
-        var fileName = Path.GetFileName(item.Key);
-        if (string.IsNullOrEmpty(fileName)) continue;
+        foreach (var item in filesToDownload)
+        {
+            var fileName = Path.GetFileName(item.Key);
+            if (string.IsNullOrEmpty(fileName)) continue;
 
-        var zipEntry = archive.CreateEntry(fileName, CompressionLevel.Fastest);
-        using var zipEntryStream = zipEntry.Open();
+            var zipEntry = archive.CreateEntry(fileName, CompressionLevel.Fastest);
+            using var zipEntryStream = zipEntry.Open();
 
-        await StreamS3FileToZipAsync(s3Client, bucketName, item.Key, zipEntryStream);
-    }
-},
-contentType: "application/zip",
-fileDownloadName: "RevitAddinUpdate.zip");
-});
+            await StreamS3FileToZipAsync(s3Client, bucketName, item.Key, zipEntryStream);
+        }
+    },
+    contentType: "application/zip",
+    fileDownloadName: "RevitAddinUpdate.zip");
+    });
 
 app.Run();
 

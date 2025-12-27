@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DeepDeepBim.RevitApiAddinUpdateApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5750fac17ccfbada5cedbfa38446d9c846217301")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+41ead380390decbc0f0531d6bc254372f7584f4b")]
 [assembly: System.Reflection.AssemblyProductAttribute("DeepDeepBim.RevitApiAddinUpdateApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DeepDeepBim.RevitApiAddinUpdateApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
