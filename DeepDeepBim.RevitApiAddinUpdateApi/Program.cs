@@ -2,6 +2,7 @@ using System.IO.Compression;
 using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
+using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 
