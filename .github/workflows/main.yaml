@@ -53,4 +53,4 @@ jobs:
 
             sudo systemctl daemon-reload
             cd /etc/systemd/system/ 
-            sudo systemctl restart eduardoos-deepdeepbim-api.service
+            sudo systemctl restart eduardoos-deepdeepbim-api.service 
