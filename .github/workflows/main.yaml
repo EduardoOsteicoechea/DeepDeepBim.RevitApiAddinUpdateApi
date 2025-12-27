@@ -41,7 +41,7 @@ jobs:
               exit 1 
             fi
 
-            sudo cp -r "$TEMP_CLONE_DIR"/* "$DEST_DIR"/
+            sudo cp -r "$TEMP_CLONE_DIR"/* "$DEST_DIR"/ 
 
             sudo rm -rf "$TEMP_CLONE_DIR"
                   
